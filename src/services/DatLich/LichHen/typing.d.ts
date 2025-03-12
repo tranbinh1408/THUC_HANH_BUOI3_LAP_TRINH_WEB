@@ -15,13 +15,12 @@ declare module LichHen {
 		dichVu?: DichVu.IRecord;
 		idNhanVien: string;
 		nhanVien?: NhanVien.IRecord;
-		ngayHen: string; // ISO date string
-		gioHen: string; // format: HH:mm
+		ngayHen: string; 
+		gioHen: string;
 		trangThai: ETrangThaiLichHen;
 		ghiChu?: string;
 		createdAt?: string;
 		updatedAt?: string;
-		//Giang
 		feedback?: string;
 		rateScore?: number;
 	}

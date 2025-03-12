@@ -12,7 +12,6 @@ interface LichLamViecProps {
 const LichLamViec: React.FC<LichLamViecProps> = ({ lichLamViec = [], onChange }) => {
   const [dataSource, setDataSource] = useState<any[]>([]);
 
-  // Cập nhật dữ liệu khi props thay đổi
   useEffect(() => {
     if (lichLamViec && lichLamViec.length > 0) {
       setDataSource(
@@ -28,7 +27,6 @@ const LichLamViec: React.FC<LichLamViecProps> = ({ lichLamViec = [], onChange })
     }
   }, [lichLamViec]);
 
-  // Thêm dòng mới
   const handleAdd = () => {
     const newData = {
       key: Date.now(),
@@ -42,14 +40,12 @@ const LichLamViec: React.FC<LichLamViecProps> = ({ lichLamViec = [], onChange })
     updateLichLamViec([...dataSource, newData]);
   };
 
-  // Xóa dòng
   const handleDelete = (key: React.Key) => {
     const newData = dataSource.filter((item) => item.key !== key);
     setDataSource(newData);
     updateLichLamViec(newData);
   };
 
-  // Cập nhật thứ
   const handleThuChange = (value: number, key: React.Key) => {
     const newData = dataSource.map((item) => {
       if (item.key === key) {
@@ -64,7 +60,6 @@ const LichLamViec: React.FC<LichLamViecProps> = ({ lichLamViec = [], onChange })
     updateLichLamViec(newData);
   };
 
-  // Cập nhật giờ làm
   const handleGioLamChange = (time: moment.Moment | null, key: React.Key) => {
     if (!time) return;
     const newData = dataSource.map((item) => {
@@ -81,7 +76,6 @@ const LichLamViec: React.FC<LichLamViecProps> = ({ lichLamViec = [], onChange })
     updateLichLamViec(newData);
   };
 
-  // Cập nhật giờ nghỉ
   const handleGioNghiChange = (time: moment.Moment | null, key: React.Key) => {
     if (!time) return;
     const newData = dataSource.map((item) => {
@@ -98,7 +92,6 @@ const LichLamViec: React.FC<LichLamViecProps> = ({ lichLamViec = [], onChange })
     updateLichLamViec(newData);
   };
 
-  // Cập nhật lịch làm việc cho component cha
   const updateLichLamViec = (data: any[]) => {
     const lichMoi = data.map(({ key, gioLamMoment, gioNghiMoment, ...rest }) => rest);
     onChange(lichMoi.filter(lich => lich.thu !== null));

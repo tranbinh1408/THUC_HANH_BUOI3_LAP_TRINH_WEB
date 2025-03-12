@@ -6,7 +6,6 @@ export default () => {
   
   const objInit = useInitModel<any>('nhan-vien');
 
-  // Thêm dữ liệu mẫu khi khởi tạo
   useEffect(() => {
     if (!objInit.data || objInit.data.length === 0) {
       const nhanVienMau = [
@@ -103,21 +102,17 @@ export default () => {
     }
   }, []);
 
-  // Kiểm tra nếu nhân viên có thể nhận khách vào ngày giờ cụ thể
   const kiemTraNhanVienCoTheLam = async (idNhanVien: string, ngayHen: string, gioHen: string): Promise<boolean> => {
     try {
-      // Lấy thông tin nhân viên
       const nhanVien = objInit.data.find((nv: any) => nv._id === idNhanVien);
       if (!nhanVien) return false;
       
-      // Kiểm tra lịch làm việc
       const ngay = new Date(ngayHen);
-      const thu = ngay.getDay(); // 0: CN, 1-6: T2-T7
+      const thu = ngay.getDay(); 
       
       const lichLamViec = nhanVien.lichLamViec.find((lich: any) => lich.thu === thu);
-      if (!lichLamViec) return false; // Không làm việc vào ngày này
+      if (!lichLamViec) return false; 
       
-      // Kiểm tra giờ làm việc
       if (gioHen < lichLamViec.gioLam || gioHen > lichLamViec.gioNghi) {
         return false;
       }

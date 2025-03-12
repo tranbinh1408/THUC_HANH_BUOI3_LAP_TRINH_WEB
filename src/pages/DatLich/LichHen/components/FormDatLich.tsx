@@ -37,7 +37,6 @@ const FormDatLich: React.FC<FormDatLichProps> = ({ visible, onCancel, edit = fal
       trangThai: edit ? values.trangThai : ETrangThaiLichHen.CHO_DUYET
     };
 
-    // Kiểm tra lịch trùng - truyền thêm danh sách nhân viên
     const coTheDatLich = await kiemTraLichTrung(lichHenData, nhanVienList);
     if (!coTheDatLich) {
       return;

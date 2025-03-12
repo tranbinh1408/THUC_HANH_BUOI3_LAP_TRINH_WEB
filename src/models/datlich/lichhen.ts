@@ -11,14 +11,12 @@ export default () => {
   
   const objInit = useInitModel<any>('lich-hen');
 
-  // Thêm dữ liệu mẫu khi khởi tạo component
   useEffect(() => {
     if (!objInit.data || objInit.data.length === 0) {
       taoLichHenMau();
     }
   }, []);
 
-  // Cập nhật hàm kiểm tra lịch trùng để nhận dữ liệu nhân viên
   const kiemTraLichTrung = async (values: any, nhanVienList: any[]): Promise<boolean> => {
     try {
       if (!values.ngayHen || !values.gioHen || !values.idNhanVien || !values.idDichVu) {
@@ -26,19 +24,17 @@ export default () => {
         return false;
       }
 
-      // Tìm thông tin nhân viên từ danh sách đã được truyền vào
       const nhanVien = nhanVienList?.find((nv: any) => nv._id === values.idNhanVien);
       if (!nhanVien) {
         message.error('Không tìm thấy thông tin nhân viên!');
         return false;
       }
 
-      // Kiểm tra xem nhân viên đã có lịch vào thời gian này chưa
       const lichHenHienTai = objInit.data.filter((item: any) => 
         item.ngayHen === values.ngayHen && 
         item.gioHen === values.gioHen && 
         item.idNhanVien === values.idNhanVien &&
-        (values._id ? item._id !== values._id : true) // Bỏ qua chính nó khi cập nhật
+        (values._id ? item._id !== values._id : true) 
       );
 
       if (lichHenHienTai.length > 0) {
@@ -46,14 +42,12 @@ export default () => {
         return false;
       }
 
-      // Kiểm tra số lịch hẹn của nhân viên trong ngày
       const lichHenTrongNgay = objInit.data.filter((item: any) => 
         item.ngayHen === values.ngayHen && 
         item.idNhanVien === values.idNhanVien &&
-        (values._id ? item._id !== values._id : true) // Bỏ qua chính nó khi cập nhật
+        (values._id ? item._id !== values._id : true) 
       );
 
-      // Sử dụng soKhachToiDa từ thông tin nhân viên
       if (lichHenTrongNgay.length >= nhanVien.soKhachToiDa) {
         message.error(`Nhân viên ${nhanVien.hoTen} đã đạt số lượng khách tối đa (${nhanVien.soKhachToiDa}) trong ngày!`);
         return false;
@@ -66,7 +60,6 @@ export default () => {
     }
   };
 
-  // Cập nhật trạng thái lịch hẹn
   const capNhatTrangThaiLichHen = async (id: string, trangThai: ETrangThaiLichHen) => {
     try {
       const lichHen = objInit.data.find((item: any) => item._id === id);
@@ -87,7 +80,6 @@ export default () => {
     }
   };
 
-  // Tạo dữ liệu mẫu nếu chưa có dữ liệu
   const taoLichHenMau = () => {
     const danhSachMau = [
       {
@@ -124,7 +116,6 @@ export default () => {
       },
     ];
 
-    // Cập nhật data với dữ liệu mẫu
     objInit.setData(danhSachMau);
   };
 

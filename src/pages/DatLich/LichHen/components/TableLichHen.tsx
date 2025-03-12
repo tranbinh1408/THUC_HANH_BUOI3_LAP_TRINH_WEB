@@ -39,34 +39,28 @@ const TableLichHen: React.FC<TableLichHenProps> = ({ onEdit }) => {
   const [isRatingFormVisible, setIsRatingFormVisible] = useState(false)
   const [currentRecord, setCurrentRecord] = useState<ILichHenRecord | null>(null)
 
-  // Lấy thông tin dịch vụ dựa vào ID
   const getDichVuInfo = (idDichVu: string) => {
     const dichVu = dichVuData?.find((item: any) => item._id === idDichVu)
     return dichVu?.tenDichVu || "N/A"
   }
 
-  // Lấy thông tin nhân viên dựa vào ID
   const getNhanVienInfo = (idNhanVien: string) => {
     const nhanVien = nhanVienData?.find((item: any) => item._id === idNhanVien)
     return nhanVien?.hoTen || "N/A"
   }
 
-  // Xác nhận lịch hẹn
   const handleXacNhan = async (record: ILichHenRecord) => {
     await capNhatTrangThaiLichHen(record._id, ETrangThaiLichHen.XAC_NHAN)
   }
 
-  // Hủy lịch hẹn
   const handleHuy = async (record: ILichHenRecord) => {
     await capNhatTrangThaiLichHen(record._id, ETrangThaiLichHen.HUY)
   }
 
-  // Hoàn thành lịch hẹn
   const handleHoanThanh = async (record: ILichHenRecord) => {
     await capNhatTrangThaiLichHen(record._id, ETrangThaiLichHen.HOAN_THANH)
   }
 
-  // Xóa lịch hẹn
   const handleDelete = async (id: string) => {
     await deleteModel(id)
   }
@@ -76,8 +70,6 @@ const TableLichHen: React.FC<TableLichHenProps> = ({ onEdit }) => {
     setIsRatingFormVisible(true)
   }
 
-  //Giang 
-  // Save rate
   const handleSaveRating = async (feedback: string, rateScore: number) => {
     if (!currentRecord) return
 
@@ -88,7 +80,6 @@ const TableLichHen: React.FC<TableLichHenProps> = ({ onEdit }) => {
         rateScore,
       })
 
-      //update staff with new average rating point
       const nhanVien = nhanVienData?.find((item: any) => item._id === currentRecord.idNhanVien)
       if (nhanVien) {
         const updatedFeedbacks = [...(nhanVien.feedbacks || []), feedback]

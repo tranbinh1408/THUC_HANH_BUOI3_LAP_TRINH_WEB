@@ -35,7 +35,6 @@ const TableNhanVien: React.FC<TableNhanVienProps> = ({ onEdit, onViewSchedule })
     await deleteModel(id)
   }
 
-  // Lấy tên dịch vụ từ ID
   const getTenDichVu = (idDichVu: string) => {
     const dichVu = dichVuData?.find((dv: any) => dv._id === idDichVu)
     return dichVu?.tenDichVu || "N/A"

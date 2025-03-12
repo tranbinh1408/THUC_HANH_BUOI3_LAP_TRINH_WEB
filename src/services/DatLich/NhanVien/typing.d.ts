@@ -1,8 +1,8 @@
 declare module NhanVien {
 	export interface ILichLamViec {
-		thu: number; // 0: Chủ nhật, 1-6: Thứ 2 đến thứ 7
-		gioLam: string; // format: HH:mm
-		gioNghi: string; // format: HH:mm
+		thu: number; 
+		gioLam: string; 
+		gioNghi: string;
 	}
 
 	export interface IRecord {
@@ -21,8 +21,7 @@ declare module NhanVien {
 		trangThai: boolean;
 		createdAt?: string;
 		updatedAt?: string;
-		//Giang
-    feedbacks: string[];
+    	feedbacks: string[];
 		averageRate?: number;
 
 	}

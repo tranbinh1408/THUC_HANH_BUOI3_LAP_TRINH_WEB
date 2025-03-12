@@ -5,7 +5,7 @@ declare module DichVu {
     tenDichVu: string;
     moTa?: string;
     giaTien: number;
-    thoiGianThucHien: number; // số phút cần để thực hiện dịch vụ
+    thoiGianThucHien: number; 
     trangThai: boolean;
     createdAt?: string;
     updatedAt?: string;
