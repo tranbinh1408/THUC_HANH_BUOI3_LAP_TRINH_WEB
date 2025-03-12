@@ -60,15 +60,6 @@ const LichHenPage = () => {
               ))}
             </Select>
             
-            <Radio.Group 
-              value={viewMode}
-              onChange={(e) => setViewMode(e.target.value)}
-              buttonStyle="solid"
-            >
-              <Radio.Button value="table"><TableOutlined /> Bảng</Radio.Button>
-              <Radio.Button value="calendar"><CalendarOutlined /> Lịch</Radio.Button>
-            </Radio.Group>
-            
             <Button type="primary" icon={<PlusOutlined />} onClick={handleCreateNew}>
               Đặt lịch hẹn mới
             </Button>

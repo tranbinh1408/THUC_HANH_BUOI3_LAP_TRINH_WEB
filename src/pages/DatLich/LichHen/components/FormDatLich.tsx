@@ -9,27 +9,15 @@ import { ETrangThaiLichHen, trangThaiLichHenText } from '@/services/DatLich/Lich
 interface FormDatLichProps {
   visible: boolean;
   onCancel: () => void;
+  edit?: boolean;
 }
 
-const FormDatLich: React.FC<FormDatLichProps> = ({ visible, onCancel }) => {
+const FormDatLich: React.FC<FormDatLichProps> = ({ visible, onCancel, edit = false }) => {
   const [form] = Form.useForm();
-  const { record, edit, formSubmiting, postModel, putModel, kiemTraLichTrung } = useModel('datlich.lichhen');
+  const { record, formSubmiting, postModel, putModel, kiemTraLichTrung } = useModel('datlich.lichhen');
+  const { data: nhanVienList } = useModel('datlich.nhanvien');
+  const { data: dichVuList } = useModel('datlich.dichvu');
   
-  // Dữ liệu mẫu cho các select box
-  const dichVuList = [
-    { _id: '1', tenDichVu: 'Cắt tóc nam', giaTien: 100000 },
-    { _id: '2', tenDichVu: 'Làm móng', giaTien: 150000 },
-    { _id: '3', tenDichVu: 'Massage', giaTien: 300000 },
-    { _id: '4', tenDichVu: 'Làm tóc', giaTien: 250000 },
-  ];
-  
-  const nhanVienList = [
-    { _id: '1', hoTen: 'Trần Văn Tuấn', chuyenMon: ['1', '3'] },
-    { _id: '2', hoTen: 'Nguyễn Thị Hương', chuyenMon: ['2', '4'] },
-    { _id: '3', hoTen: 'Lê Minh Quân', chuyenMon: ['1', '4'] },
-    { _id: '4', hoTen: 'Phạm Thị Lan', chuyenMon: ['2', '3'] },
-  ];
-
   useEffect(() => {
     if (!visible) resetFieldsForm(form);
     else if (record?._id) {
@@ -49,8 +37,8 @@ const FormDatLich: React.FC<FormDatLichProps> = ({ visible, onCancel }) => {
       trangThai: edit ? values.trangThai : ETrangThaiLichHen.CHO_DUYET
     };
 
-    // Kiểm tra lịch trùng
-    const coTheDatLich = await kiemTraLichTrung(lichHenData);
+    // Kiểm tra lịch trùng - truyền thêm danh sách nhân viên
+    const coTheDatLich = await kiemTraLichTrung(lichHenData, nhanVienList);
     if (!coTheDatLich) {
       return;
     }

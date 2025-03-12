@@ -18,11 +18,18 @@ export default () => {
     }
   }, []);
 
-  // Kiểm tra lịch trùng
-  const kiemTraLichTrung = async (values: any): Promise<boolean> => {
+  // Cập nhật hàm kiểm tra lịch trùng để nhận dữ liệu nhân viên
+  const kiemTraLichTrung = async (values: any, nhanVienList: any[]): Promise<boolean> => {
     try {
       if (!values.ngayHen || !values.gioHen || !values.idNhanVien || !values.idDichVu) {
         message.error('Thiếu thông tin để kiểm tra lịch hẹn');
+        return false;
+      }
+
+      // Tìm thông tin nhân viên từ danh sách đã được truyền vào
+      const nhanVien = nhanVienList?.find((nv: any) => nv._id === values.idNhanVien);
+      if (!nhanVien) {
+        message.error('Không tìm thấy thông tin nhân viên!');
         return false;
       }
 
@@ -46,9 +53,9 @@ export default () => {
         (values._id ? item._id !== values._id : true) // Bỏ qua chính nó khi cập nhật
       );
 
-      // Tạm thời giả định giới hạn là 10 khách/ngày cho mọi nhân viên
-      if (lichHenTrongNgay.length >= 10) {
-        message.error('Nhân viên đã đạt số lượng khách tối đa trong ngày!');
+      // Sử dụng soKhachToiDa từ thông tin nhân viên
+      if (lichHenTrongNgay.length >= nhanVien.soKhachToiDa) {
+        message.error(`Nhân viên ${nhanVien.hoTen} đã đạt số lượng khách tối đa (${nhanVien.soKhachToiDa}) trong ngày!`);
         return false;
       }
 

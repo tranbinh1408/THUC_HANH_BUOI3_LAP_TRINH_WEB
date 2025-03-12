@@ -16,7 +16,7 @@ declare module NhanVien {
     ngaySinh?: string;
     diaChi?: string;
     chuyenMon?: string[];
-    soKhachToiDa: number; // số khách tối đa có thể phục vụ trong ngày
+    soKhachToiDa: number; 
     lichLamViec: ILichLamViec[];
     trangThai: boolean;
     createdAt?: string;
