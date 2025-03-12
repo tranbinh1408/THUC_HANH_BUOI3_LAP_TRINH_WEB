@@ -70,8 +70,7 @@ const TableLichHen: React.FC<TableLichHenProps> = ({ onEdit }) => {
   const handleDelete = async (id: string) => {
     await deleteModel(id)
   }
-
-  // Mở modal đánh giá
+  
   const showRatingForm = (record: ILichHenRecord) => {
     setCurrentRecord(record)
     setIsRatingFormVisible(true)
