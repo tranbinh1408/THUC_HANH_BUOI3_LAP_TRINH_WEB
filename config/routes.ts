@@ -66,12 +66,6 @@
 			icon: 'AppstoreOutlined',
 		  },
 		  {
-			path: '/dat-lich/lich-lam-viec',
-			name: 'LichLamViec',
-			component: './DatLich/LichLamViec',
-			icon: 'ClockCircleOutlined',
-		  },
-		  {
 			path: '/dat-lich/bao-cao',
 			name: 'BaoCao',
 			component: './DatLich/BaoCao',

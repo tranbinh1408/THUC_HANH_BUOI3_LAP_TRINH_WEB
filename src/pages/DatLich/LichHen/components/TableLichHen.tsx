@@ -30,6 +30,30 @@ interface TableLichHenProps {
 const TableLichHen: React.FC<TableLichHenProps> = ({ onEdit }) => {
   const { data, loading, deleteModel, getModels, capNhatTrangThaiLichHen, trangThaiFilter } = useModel('datlich.lichhen');
 
+  // Lấy thông tin dịch vụ dựa vào ID
+  const getDichVuInfo = (idDichVu: string) => {
+    const dichVuList = [
+      { _id: '1', tenDichVu: 'Cắt tóc nam', giaTien: 100000 },
+      { _id: '2', tenDichVu: 'Làm móng', giaTien: 150000 },
+      { _id: '3', tenDichVu: 'Massage', giaTien: 300000 },
+      { _id: '4', tenDichVu: 'Làm tóc', giaTien: 250000 },
+    ];
+    
+    return dichVuList.find(item => item._id === idDichVu)?.tenDichVu || 'N/A';
+  };
+
+  // Lấy thông tin nhân viên dựa vào ID
+  const getNhanVienInfo = (idNhanVien: string) => {
+    const nhanVienList = [
+      { _id: '1', hoTen: 'Trần Văn Tuấn', chuyenMon: ['1', '3'] },
+      { _id: '2', hoTen: 'Nguyễn Thị Hương', chuyenMon: ['2', '4'] },
+      { _id: '3', hoTen: 'Lê Minh Quân', chuyenMon: ['1', '4'] },
+      { _id: '4', hoTen: 'Phạm Thị Lan', chuyenMon: ['2', '3'] },
+    ];
+    
+    return nhanVienList.find(item => item._id === idNhanVien)?.hoTen || 'N/A';
+  };
+
   // Xác nhận lịch hẹn
   const handleXacNhan = async (record: ILichHenRecord) => {
     await capNhatTrangThaiLichHen(record._id, ETrangThaiLichHen.XAC_NHAN);
@@ -64,15 +88,21 @@ const TableLichHen: React.FC<TableLichHenProps> = ({ onEdit }) => {
     },
     {
       title: 'Dịch vụ',
-      dataIndex: 'dichVu',
+      dataIndex: 'idDichVu',
       key: 'dichVu',
-      render: (dichVu: any) => dichVu?.tenDichVu || 'N/A',
+      render: (idDichVu: string, record: ILichHenRecord) => {
+        // Ưu tiên sử dụng thông tin dichVu nếu có, nếu không thì lấy từ idDichVu
+        return record.dichVu?.tenDichVu || getDichVuInfo(idDichVu);
+      },
     },
     {
       title: 'Nhân viên',
-      dataIndex: 'nhanVien',
+      dataIndex: 'idNhanVien',
       key: 'nhanVien',
-      render: (nhanVien: any) => nhanVien?.hoTen || 'N/A',
+      render: (idNhanVien: string, record: ILichHenRecord) => {
+        // Ưu tiên sử dụng thông tin nhanVien nếu có, nếu không thì lấy từ idNhanVien
+        return record.nhanVien?.hoTen || getNhanVienInfo(idNhanVien);
+      },
     },
     {
       title: 'Thời gian',

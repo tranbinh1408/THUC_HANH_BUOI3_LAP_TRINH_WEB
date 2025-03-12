@@ -27,6 +27,12 @@ const LichHenPage = () => {
     setVisibleFormDatLich(true);
   };
 
+  const handleEdit = (record: any) => {
+    setRecord(record);
+    setEdit(true);
+    setVisibleFormDatLich(true);
+  };
+
   return (
     <>
       <Card 
@@ -70,7 +76,7 @@ const LichHenPage = () => {
         }
       >
         {viewMode === 'table' ? (
-          <TableLichHen />
+          <TableLichHen onEdit={handleEdit} />
         ) : (
           <div>Hiển thị lịch sẽ được thêm sau</div>
         )}
