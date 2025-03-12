@@ -468,11 +468,8 @@ export const genExcelFile = (data: (string | number | null | undefined)[][], fil
  * Clear values of component in Form
  * @param form
  */
-export const resetFieldsForm = (form: FormInstance<any>, formDefaultValues?: Record<string, any>) => {
-	const values = form.getFieldsValue();
-	Object.keys(values).map((k) => (values[k] = undefined));
-	form.setFieldsValue({ ...values, ...(formDefaultValues ?? {}) });
-	form.setFields(form.getFieldsError().map((item) => ({ name: item.name, errors: undefined, warnings: undefined })));
+export const resetFieldsForm = (form: FormInstance) => {
+	form.resetFields();
 };
 
 /**
@@ -601,4 +598,11 @@ export const createTextLinks = (text: string, targetBlank: boolean = true) => {
 			return `<a href="${hyperlink}"${targetBlank ? 'target="_blank" rel="noreferrer"' : ''}>${url}</a>`;
 		},
 	);
+};
+
+export const formatCurrency = (value: number) => {
+	return new Intl.NumberFormat('vi-VN', {
+		style: 'currency',
+		currency: 'VND'
+	}).format(value);
 };
