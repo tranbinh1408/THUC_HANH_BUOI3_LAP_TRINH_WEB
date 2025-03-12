@@ -99,7 +99,7 @@ const FormDatLich: React.FC<FormDatLichProps> = ({ visible, onCancel, edit = fal
         <Form.Item
           name="email"
           label="Email"
-          rules={[...rules.email]}
+          rules={[{ type: 'email', message: 'Email không đúng định dạng' }]}
         >
           <Input placeholder="Nhập email" />
         </Form.Item>

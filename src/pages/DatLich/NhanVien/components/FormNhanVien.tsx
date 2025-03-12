@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Form, Input, InputNumber, Select, DatePicker, Switch, Button, Modal, Tabs } from 'antd';
-import { useModel } from 'umi';
-import moment from 'moment';
+import { EGioiTinh } from '@/services/DatLich/NhanVien/constants';
 import rules from '@/utils/rules';
 import { resetFieldsForm } from '@/utils/utils';
-import { EGioiTinh } from '@/services/DatLich/NhanVien/constants';
+import { Button, DatePicker, Form, Input, InputNumber, Modal, Select, Switch, Tabs } from 'antd';
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { useModel } from 'umi';
 import LichLamViec from './LichLamViec';
 
 const { TabPane } = Tabs;
@@ -111,7 +111,7 @@ const FormNhanVien: React.FC<FormNhanVienProps> = ({ visible, onCancel }) => {
             <Form.Item
               name="email"
               label="Email"
-              rules={[...rules.email]}
+              rules={[{ type: 'email', message: 'Email không hợp lệ' }, { required: true, message: 'Vui lòng nhập email' }]}
             >
               <Input placeholder="Nhập email" />
             </Form.Item>
