@@ -42,6 +42,43 @@
 		icon: 'OrderedListOutlined',
 		component: './TodoList',
 	},
+	{
+		path: '/dat-lich',
+		name: 'DatLich',
+		icon: 'CalendarOutlined',
+		routes: [
+		  {
+			path: '/dat-lich/lich-hen',
+			name: 'LichHen',
+			component: './DatLich/LichHen',
+			icon: 'ScheduleOutlined',
+		  },
+		  {
+			path: '/dat-lich/nhan-vien',
+			name: 'NhanVien',
+			component: './DatLich/NhanVien',
+			icon: 'TeamOutlined',
+		  },
+		  {
+			path: '/dat-lich/dich-vu',
+			name: 'DichVu',
+			component: './DatLich/DichVu',
+			icon: 'AppstoreOutlined',
+		  },
+		  {
+			path: '/dat-lich/lich-lam-viec',
+			name: 'LichLamViec',
+			component: './DatLich/LichLamViec',
+			icon: 'ClockCircleOutlined',
+		  },
+		  {
+			path: '/dat-lich/bao-cao',
+			name: 'BaoCao',
+			component: './DatLich/BaoCao',
+			icon: 'BarChartOutlined',
+		  },
+		],
+	  },
 
 	// DANH MUC HE THONG
 	// {
